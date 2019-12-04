@@ -1,6 +1,7 @@
 import Student from '../models/Student';
 
 class StudentController {
+  // TODO criar validações dos campos para store
   async store(req, res) {
     const studentExists = await Student.findOne({
       where: { email: req.body.email },
@@ -15,6 +16,7 @@ class StudentController {
     return res.status(201).json(student);
   }
 
+  // TODO criar validações dos campos para update
   async update(req, res) {
     const { id } = req.params;
     console.log(id);
