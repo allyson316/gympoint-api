@@ -1,4 +1,3 @@
-import * as Yup from 'yup';
 import User from '../models/User';
 
 class UserController {
@@ -6,12 +5,12 @@ class UserController {
     const userExists = await User.findOne({ where: { email: req.body.email } });
 
     if (userExists) {
-      return res.status(400).json({ error: 'User already created!' });
+      return res.status(400).json({ error: 'Usuário já cadastrado!' });
     }
 
     const { id, name, email } = await User.create(req.body);
 
-    return res.json({
+    return res.status(201).json({
       id,
       name,
       email,
@@ -37,7 +36,7 @@ class UserController {
 
     const { id, name } = await user.update(req.body);
 
-    return res.json({
+    return res.status(200).json({
       id,
       name,
       email,
