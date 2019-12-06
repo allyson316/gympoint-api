@@ -19,7 +19,6 @@ class StudentController {
   // TODO criar validações dos campos para update
   async update(req, res) {
     const { id } = req.params;
-    console.log(id);
     const { email } = req.body;
 
     const student = await Student.findByPk(id);
