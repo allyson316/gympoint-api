@@ -26,6 +26,22 @@ services:
     command: yarn run dev
     ports:
       - 8080:8080
+  queue:
+    image: node:10.17.0-alpine
+    depends_on:
+      - redis
+    volumes:
+      - .:/usr/app
+    environment:
+      - NODE_ENV=development
+      - NODE_PORT=8080
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    working_dir: /usr/app
+    command: yarn
+    command: yarn queue
+    ports:
+      - 8081:8081
   db:
     image: postgres
     environment:
