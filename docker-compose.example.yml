@@ -1,0 +1,42 @@
+version: "3"
+services:
+  app:
+    image: node:10.17.0-alpine
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/usr/app
+    environment:
+      - NODE_ENV=development
+      - NODE_PORT=8080
+      - APP_SECRET=[PREENCHER]
+      - DB_NAME=[PREENCHER]
+      - DB_HOST=db
+      - DB_USER=[PREENCHER]
+      - DB_PASSWORD=[PREENCHER]
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MAIL_HOST=smtp.mailtrap.io
+      - MAIL_PORT=2525
+      - MAIL_USER=[PREENCHER]
+      - MAIL_PASS=[PREENCHER]
+    working_dir: /usr/app
+    command: yarn
+    command: yarn run dev
+    ports:
+      - 8080:8080
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=[PREENCHER]
+      - POSTGRES_PASSWORD=[PREENCHER]
+      - POSTGRES_DB=[PREENCHER]
+    volumes:
+    - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
