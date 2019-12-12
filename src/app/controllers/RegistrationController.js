@@ -13,13 +13,13 @@ class RegistrationController {
     const studentExixts = await Student.findByPk(studentId);
 
     if (!studentExixts) {
-      res.status(400).json({ error: 'O aluno informado não existe!' });
+      return res.status(400).json({ error: 'O aluno informado não existe!' });
     }
 
     const planExists = await Plan.findByPk(planId);
 
     if (!planExists) {
-      res.status(400).json({ error: 'O plano informado não existe!' });
+      return res.status(400).json({ error: 'O plano informado não existe!' });
     }
 
     const registrationExists = await Registration.findOne({
@@ -27,7 +27,7 @@ class RegistrationController {
     });
 
     if (registrationExists) {
-      res
+      return res
         .status(400)
         .json({ error: 'Já existe uma matrícula para o aluno informado!' });
     }
@@ -54,7 +54,7 @@ class RegistrationController {
       regMail,
     });
 
-    res.status(201).json(registration);
+    return res.status(201).json(registration);
   }
 
   async index(req, res) {
@@ -85,13 +85,15 @@ class RegistrationController {
     const registrationExists = await Registration.findByPk(id);
 
     if (!registrationExists) {
-      res.status(400).json({ error: 'A matrícula informada não existe!' });
+      return res
+        .status(400)
+        .json({ error: 'A matrícula informada não existe!' });
     }
 
     const planExists = await Plan.findByPk(planId);
 
     if (!planExists) {
-      res.status(400).json({ error: 'O plano informado não existe!' });
+      return res.status(400).json({ error: 'O plano informado não existe!' });
     }
 
     const endDate = addMonths(parseISO(startDate), planExists.duration);
