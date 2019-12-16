@@ -1,9 +1,10 @@
 import Bee from 'bee-queue';
 import RegistrationMail from '../app/jobs/RegistrationMail';
+import HelpOrderAnswerMail from '../app/jobs/HelpOrderAnswerMail';
 import redisConfig from '../config/redis';
 
 // para cada job criamos uma fila e armazenamos no array jobs
-const jobs = [RegistrationMail];
+const jobs = [RegistrationMail, HelpOrderAnswerMail];
 
 class Queue {
   constructor() {
