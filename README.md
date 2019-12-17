@@ -1,3 +1,13 @@
-# gympoint-api
+# GYMPOINT 1.0 | Aplicação para certificação Rocketseat
 
-projeto para conclusão do botcamp rocketseat
+## Run & Code
+
+### Instalar dependências
+```
+yarn
+```
+
+### Iniciar server em dev e dependências(redis, mongo, postgres e serviço de fila)
+```
+docker-compose up
+```
