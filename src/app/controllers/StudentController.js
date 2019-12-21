@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import Student from '../models/Student';
 
 class StudentController {
@@ -14,6 +15,23 @@ class StudentController {
     const student = await Student.create(req.body);
 
     return res.status(201).json(student);
+  }
+
+  async index(req, res) {
+    const { q } = req.query;
+    if (!q) {
+      const students = await Student.findAll();
+
+      return res.status(200).json(students);
+    }
+
+    const studentsQuery = await Student.findAll({
+      where: {
+        name: { [Op.like]: `%${q}%` },
+      },
+    });
+
+    return res.status(200).json(studentsQuery);
   }
 
   // TODO criar validações dos campos para update

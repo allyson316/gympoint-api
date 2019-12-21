@@ -25,6 +25,7 @@ routes.put('/users', validateUserUpdate, UserController.update);
 
 // students
 routes.post('/students', StudentController.store);
+routes.get('/students', StudentController.index);
 routes.put('/students/:id', StudentController.update);
 
 //plans
